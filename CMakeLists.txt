@@ -44,7 +44,7 @@ function(add_public_question question header source test_count)
     add_executable(public_test_question_${question} EXCLUDE_FROM_ALL ${test_sources} ${resolved_source})
     target_include_directories(public_test_question_${question} PRIVATE include src tools/catch)
     target_compile_definitions(public_test_question_${question} PRIVATE
-        QUESTION_HEADER_PATH="${resolved_header}")
+        QUESTION_HEADER_PATH="${header}")
     add_test(NAME public_test_question_${question} COMMAND public_test_question_${question})
 endfunction()
 
