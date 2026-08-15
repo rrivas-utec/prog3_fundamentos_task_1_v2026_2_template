@@ -4,5 +4,4 @@
 
 #include <iostream>
 #include "p15.h"
-using namespace std;
 

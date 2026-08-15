@@ -4,5 +4,4 @@
 
 #include <iostream>
 #include "p12.h"
-using namespace std;
 

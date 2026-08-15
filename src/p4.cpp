@@ -4,5 +4,4 @@
 
 #include <iostream>
 #include "p4.h"
-using namespace std;
 

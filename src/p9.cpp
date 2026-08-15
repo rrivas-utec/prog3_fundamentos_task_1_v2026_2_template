@@ -4,5 +4,4 @@
 
 #include <iostream>
 #include "p9.h"
-using namespace std;
 
