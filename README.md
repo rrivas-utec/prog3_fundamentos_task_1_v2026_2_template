@@ -80,7 +80,7 @@ El constructor, destructor y operaciones de copia están dados. Implemente las d
 **Unit test (constructor de movimiento):**
 ```cpp
 Text source("UTEC"); Text moved(std::move(source));
-REQUIRE(std::strcmp(moved.cStr(), "UTEC") == 0); REQUIRE(source.empty());
+REQUIRE(std::strcmp(moved.data(), "UTEC") == 0); REQUIRE(source.empty());
 ```
 
 ## Question #8 - IntMatrix y swap (1.0 points)
@@ -141,7 +141,7 @@ Use `Text` como elemento y un arreglo dinámico como almacenamiento. La regla de
 **Unit test (lvalue y rvalue):**
 ```cpp
 History history; Text message("start"); history.add(message); history.add(Text("stop"));
-REQUIRE(history.size() == 2); REQUIRE(std::strcmp(history.at(0).cStr(), "start") == 0);
+REQUIRE(history.size() == 2); REQUIRE(std::strcmp(history.at(0).data(), "start") == 0);
 ```
 
 ## Question #14 - TaskList y separación de resultados (1.7 points)
@@ -152,7 +152,7 @@ La regla de cinco, `add` y `complete` están dadas. Implemente `extractCompleted
 ```cpp
 TaskList pending; pending.add(Text("code")); pending.add(Text("test")); pending.complete(1);
 TaskList done = pending.extractCompleted();
-REQUIRE(pending.size() == 1); REQUIRE(std::strcmp(done.at(0).title.cStr(), "test") == 0);
+REQUIRE(pending.size() == 1); REQUIRE(std::strcmp(done.at(0).title.data(), "test") == 0);
 ```
 
 ## Question #15 - TextList y realocación con movimiento (1.7 points)
@@ -162,7 +162,7 @@ La regla de cinco y la sobrecarga para lvalue están dadas. Implemente el crecim
 **Unit test (crecimiento con rvalues):**
 ```cpp
 TextList list(1); list.add(Text("one")); list.add(Text("two")); list.add(Text("three"));
-REQUIRE(list.size() == 3); REQUIRE(std::strcmp(list.at(2).cStr(), "three") == 0);
+REQUIRE(list.size() == 3); REQUIRE(std::strcmp(list.at(2).data(), "three") == 0);
 ```
 
 ## Question #16 - AdjacencyMatrix y transposición (1.7 points)
@@ -196,14 +196,16 @@ La regla de cinco y `add` están dados. Implemente `merge`, que toma un rvalue, 
 DocumentIndex first, second; first.add(Text("cat")); second.add(Text("dog"));
 first.merge(std::move(second));
 REQUIRE(first.size() == 2); REQUIRE(second.size() == 0);
-REQUIRE(std::strcmp(first.at(1).cStr(), "dog") == 0);
+REQUIRE(std::strcmp(first.at(1).data(), "dog") == 0);
 ```
 
-## Pruebas disponibles
+## Autograder local
 
-Cada pregunta tiene cuatro pruebas en `autograder/tests/question_<n>/test_<m>/test_<m>.cpp`; las restantes cubren variantes, bordes y el comportamiento complementario del caso mostrado.
+En este proyecto, los ejecutables `autograder_question_<n>` ejecutan únicamente las cuatro pruebas de la pregunta seleccionada. Por ejemplo, `autograder_question_5` compila `autograder/tests/question_5/` contra los archivos locales `./include/p5.h` y `./src/p5.cpp`; las preguntas pendientes no intervienen.
 
-## Pruebas públicas en el IDE
+## Pruebas públicas en el template
 
-Abra el proyecto con CMake en CLion o VS Code. Ejecute el objetivo de la pregunta que está implementando, por ejemplo `public_test_question_1`. El objetivo `public_tests_all` permite revisar todas las preguntas.
+Al ejecutar `template_generator.sh`, la carpeta `public_tests/` se copia íntegramente al template. Contiene las cuatro pruebas de cada pregunta, más `test-main.cpp` y `redirect_io.h`; el template no necesita la carpeta `autograder/`. En el template, ejecute `public_test_question_<n>` (por ejemplo, `public_test_question_5`) o `public_tests_all`.
+
+En Linux con GCC o Clang también está disponible `public_test_asan_leaksan`, un smoke test de AddressSanitizer, LeakSanitizer y UndefinedBehaviorSanitizer. En Windows o macOS el objetivo informa que esos sanitizadores no están disponibles en esta configuración.
 

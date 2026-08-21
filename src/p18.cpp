@@ -4,4 +4,5 @@
 
 #include <iostream>
 #include "p18.h"
+using namespace std;
 

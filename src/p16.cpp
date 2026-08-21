@@ -4,4 +4,5 @@
 
 #include <iostream>
 #include "p16.h"
+using namespace std;
 

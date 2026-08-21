@@ -4,4 +4,5 @@
 
 #include <iostream>
 #include "p7.h"
+using namespace std;
 

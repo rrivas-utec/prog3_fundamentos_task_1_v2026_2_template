@@ -4,4 +4,5 @@
 
 #include <iostream>
 #include "p17.h"
+using namespace std;
 
